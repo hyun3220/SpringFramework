@@ -39,7 +39,7 @@
 	String from = "LectureAdm@gmail.com";
 	String to = userDAO.getUserEmail(userID);
 	String subject = "강의평가 웹사이트 회원가입을 위한 이메일 인증입니다.";
-	String content = "다음 링크에 접속하여 이메일 인증을 진행하세요." + "<a href='" + host + "emailCheckAction.jsp?code=" + new SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
+	String content = "아래 링크에 접속하여 이메일 인증을 진행하세요." + "<br> <a href='" + host + "emailCheckAction.jsp?code=" + new SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
 	
 	Properties p = new Properties();
 	p.put("mail.smtp.user", from);
@@ -121,8 +121,8 @@
 					</div>
 				</li>
 			</ul>	
-			<form class = "form-inline my-2 my-lg-0">
-				<input class = "form-control mr-sm-2" type = "search" placeholder = "내용을 입력하세요." aria-label = "search">
+			<form action = "./index.jsp" method = "get" class = "form-inline my-2 my-lg-0">
+				<input type = "text" name = "search" class = "form-control mr-sm-2" type = "search" placeholder = "내용을 입력하세요." aria-label = "search">
 				<button class = "btn btn-outline-success my-2 my-sm-0" type = "submit">검색</button>
 			</form>
 		</div>
