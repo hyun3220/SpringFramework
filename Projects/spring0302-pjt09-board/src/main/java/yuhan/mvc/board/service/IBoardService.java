@@ -1,5 +1,7 @@
 package yuhan.mvc.board.service;
 
-public interface IBoardService {
+import org.springframework.ui.Model;
 
+public interface IBoardService {
+	public void execute(Model model);
 }

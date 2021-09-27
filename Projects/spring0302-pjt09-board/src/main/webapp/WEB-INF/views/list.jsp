@@ -9,7 +9,7 @@ pageEncoding="UTF-8"%>
 <title>자유게시판</title>
 </head>
 	<body>
-		<p><img src = "/board/resources/1234.png"></p>
+		<p><img src = "/board/resources/list_view.png"></p>
 		<table width="600" cellpadding="1" cellspacing="1" border="2">
 			<tr>
 				<td>번호</td>

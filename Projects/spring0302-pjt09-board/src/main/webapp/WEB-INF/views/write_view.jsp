@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%>
 <title>글 작성</title>
 </head>
 	<body>
-		<p><img src = "/board/resources/5678.png"></p>
+		<p><img src = "/board/resources/write_view.png"></p>
 		<table width="600" cellpadding="1" cellspacing="1" border="1">
 			<form action="write" method="post">
 				<tr>
