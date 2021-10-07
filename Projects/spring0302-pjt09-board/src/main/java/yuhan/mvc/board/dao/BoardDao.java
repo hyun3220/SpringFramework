@@ -65,5 +65,37 @@ public class BoardDao {
 		
 		return dtos;
 	}
+
+	public void write(String b_name, String b_subject, String b_content) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = dataSource.getConnection();
+			String query = "INSERT INTO YUHAN_BOARD(b_no, b_name, b_subject, b_content)" +
+					 		"VALUES(yuhan_board_seq.nextval, ?, ?, ?)";
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, b_name);
+			pstmt.setString(2, b_subject);
+			pstmt.setString(3, b_content);
+			
+			int rn = pstmt.executeUpdate();
+			
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		} 
+		finally {
+				try {
+					if(pstmt != null) pstmt.close();
+					if(conn != null) conn.close();
+				} 
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+		}
+		
+	}
 	
 }

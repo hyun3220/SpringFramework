@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import yuhan.mvc.board.service.BoardListService;
+import yuhan.mvc.board.service.BoardWriteService;
 import yuhan.mvc.board.service.IBoardService;
 
 @Controller
@@ -17,7 +18,7 @@ public class BoardController {
 	@RequestMapping("/list")
 	public String list(Model model) {
 		
-		IBoardService service = new BoardListService();
+		service = new BoardListService();
 		service.execute(model);
 		
 		return "list";
@@ -30,9 +31,13 @@ public class BoardController {
 		return "write_view";
 	}
 	
-	@RequestMapping("/content_view")
-	public String content_view(HttpServletRequest request, Model model) {
+
+	@RequestMapping("/write")
+	public String write(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		service = new BoardWriteService();
+		service.execute(model);
 		
-		return "content_view";
+		return "redirect:list";
 	}
 }
