@@ -27,7 +27,7 @@ pageEncoding="UTF-8"%>
 					<td> 내용 </td>
 					<td> <textarea rows="10"
 					name="b_content" >${content_view.b_content}</textarea></td>
-				</tr>0
+				</tr>
 				<tr>
 					<td colspan="2"> <input type="submit" value="수정"> &nbsp;&nbsp; <a href="list">목록보기</a>
 					&nbsp;&nbsp; <a href="delete?b_no=${content_view.b_no}">삭제</a> &nbsp;&nbsp; <a

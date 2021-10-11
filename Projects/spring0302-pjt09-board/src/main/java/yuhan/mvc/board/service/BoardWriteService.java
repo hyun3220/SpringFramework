@@ -25,4 +25,4 @@ public class BoardWriteService implements IBoardService {
 		dao.write(b_name, b_subject, b_content);
 	}
 
-}
+} 

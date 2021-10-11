@@ -3,6 +3,7 @@ package yuhan.mvc.board.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -72,15 +73,16 @@ public class BoardDao {
 		
 		try {
 			conn = dataSource.getConnection();
-			String query = "INSERT INTO YUHAN_BOARD(b_no, b_name, b_subject, b_content)" +
+			String SQL = "INSERT INTO YUHAN_BOARD(b_no, b_name, b_subject, b_content)" +
 					 		"VALUES(yuhan_board_seq.nextval, ?, ?, ?)";
-			pstmt = conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(SQL);
 			
 			pstmt.setString(1, b_name);
 			pstmt.setString(2, b_subject);
 			pstmt.setString(3, b_content);
 			
-			int rn = pstmt.executeUpdate();
+			pstmt.executeUpdate();
+			
 			
 		} 
 		catch (Exception e) {
@@ -96,6 +98,72 @@ public class BoardDao {
 				}
 		}
 		
+	}
+	
+	public BoardDto contentView(String strNo) {
+		BoardDto dto = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = dataSource.getConnection();
+			String SQL = "SELECT * FROM YUHAN_BOARD WHERE b_no = ?";
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, Integer.parseInt(strNo));
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				int b_no = rs.getInt("b_no");
+				String b_name = rs.getString("b_name");
+				String b_subject = rs.getString("b_subject");
+				String b_content = rs.getString("b_content");
+				Timestamp b_date = rs.getTimestamp("b_date");
+				
+				dto = new BoardDto(b_no, b_name, b_subject, b_content, b_date);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return dto;
+	}
+	
+	public void modify(String b_no, String b_name, String b_subject, String b_content) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = dataSource.getConnection();
+			String SQL = "UPDATE YUHAN_BOARD SET b_name=?, b_subject=?, b_content=? where b_no"
+					+ "=?";
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, b_name);
+			pstmt.setString(2, b_subject);
+			pstmt.setString(3, b_content);
+			pstmt.setInt(4, Integer.parseInt(b_no));
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e) {
+					e.printStackTrace();
+			}
+		}
 	}
 	
 }
