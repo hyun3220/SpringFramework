@@ -166,4 +166,28 @@ public class BoardDao {
 		}
 	}
 	
+	public void delete(String b_no) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = dataSource.getConnection();
+			String SQL = "DELETE FROM YUHAN_BOARD WHERE b_no = ?";
+			
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, Integer.parseInt(b_no));
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e) {
+					e.printStackTrace();
+			}
+		}
+	}
+	
 }

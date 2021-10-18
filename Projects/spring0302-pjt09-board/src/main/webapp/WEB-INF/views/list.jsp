@@ -27,8 +27,9 @@ pageEncoding="UTF-8"%>
 				<td>${dto.b_date}</td>
 			</tr>
 		</c:forEach>
-		<tr>
-			<td colspan="7"> <a href="write_view">글작성</a></td>
+		<tr>  
+			<td colspan="7"> <a href="write_view"><img src="/board/resources/buttons/write_b.gif"></a></td>
+			<!-- <td colspan="7"> <a href="write_view">글작성</a></td> -->
 		</tr>
 		</table>
 	</body>

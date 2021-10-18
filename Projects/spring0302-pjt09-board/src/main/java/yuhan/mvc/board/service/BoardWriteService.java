@@ -21,8 +21,10 @@ public class BoardWriteService implements IBoardService {
 		String b_subject = request.getParameter("b_subject");
 		String b_content = request.getParameter("b_content");
 		
-		BoardDao dao = new BoardDao();
-		dao.write(b_name, b_subject, b_content);
+		if(b_name != "" && b_name != null || b_subject != "" && b_subject != null || b_content != "" && b_content != null) {
+			BoardDao dao = new BoardDao();
+			dao.write(b_name, b_subject, b_content);
+		}
 	}
 
 } 
